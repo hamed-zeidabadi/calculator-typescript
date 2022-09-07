@@ -1,19 +1,26 @@
 "use strict";
 const result = document.querySelector("#result");
 const numbers = document.querySelectorAll(".numbers");
-const clear = document.querySelector("#clear");
-const del = document.querySelector("#del");
-const percent = document.querySelector("#percent");
-const division = document.querySelector("#division");
-const multi = document.querySelector("#multi");
-const sub = document.querySelector("#sub");
-const add = document.querySelector("#add");
-const dot = document.querySelector("#dot");
-const equal = document.querySelector("#equal");
+// const clear = document.querySelector("#clear")! as HTMLElement;
+// const del = document.querySelector("#del")! as HTMLElement;
+// const percent = document.querySelector("#percent")! as HTMLElement;
+// const division = document.querySelector("#division")! as HTMLElement;
+// const multi = document.querySelector("#multi")! as HTMLElement;
+// const sub = document.querySelector("#sub")! as HTMLElement;
+// const add = document.querySelector("#add")! as HTMLElement;
+// const dot = document.querySelector("#dot")! as HTMLElement;
+// const equal = document.querySelector("#equal")! as HTMLElement;
+const marks = document.querySelectorAll(".marks");
 let state = {
     current: [],
-    prev: [],
     compute: 0,
+};
+const updateResult = () => {
+    let _value = "";
+    for (const item of state.current) {
+        _value = item.toString().trim();
+    }
+    result.value = _value;
 };
 numbers.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -33,30 +40,73 @@ numbers.forEach((btn) => {
         else {
             state.current.push(_value);
         }
+        updateResult();
         console.log("_value :", state);
     });
 });
-clear.addEventListener("click", () => {
-    state.current = [];
-    console.log(state.current);
+marks.forEach((mark) => {
+    mark.addEventListener("click", () => {
+        const _value = mark.innerHTML;
+        console.log("case", _value);
+        switch (_value) {
+            case "AC":
+                state.current = [];
+                break;
+            case "C":
+                state.current.pop();
+                break;
+            case "+":
+                plusNumber();
+                break;
+            case "-":
+                minusNumber();
+                break;
+            case "=":
+                // equalsNumber();
+                break;
+            default:
+                break;
+        }
+    });
 });
-del.addEventListener("click", () => {
-    state.current.pop();
-    console.log(state.current);
-});
-add.addEventListener("click", () => {
-    let { current, prev, compute } = state;
+const plusNumber = () => {
     let _value = "";
-    for (const item of current) {
-        _value += item.toString().trim();
+    for (const item of state.current) {
+        if (state.current.length === 1) {
+            _value = item.toString().trim();
+        }
+        else {
+            _value += item.toString().trim();
+        }
     }
-    if (current.length === 0) {
-        const _valueToNumber = Number(_value);
-        state.prev.push(_valueToNumber);
-        state.current = [];
+    state.compute += Number(_value);
+    state.current = [];
+    console.log(state.compute);
+};
+const minusNumber = () => {
+    let _value = "";
+    for (const item of state.current) {
+        if (state.current.length === 1) {
+            _value = item.toString().trim();
+        }
+        else {
+            _value += item.toString().trim();
+        }
     }
-    else {
-        const _valueToNumber = Number(_value);
-    }
-    console.log("add");
-});
+    state.compute -= Number(_value);
+    state.current = [];
+    console.log(state.compute);
+};
+// const equalsNumber = (): any => {
+//   let _value: string = "";
+//   for (const item of state.current) {
+//     if (state.current.length === 1) {
+//       _value = item.toString().trim();
+//     } else {
+//       _value += item.toString().trim();
+//     }
+//   }
+//   state.compute -= Number(_value);
+//   state.current = [];
+//   console.log(state.compute);
+// };
