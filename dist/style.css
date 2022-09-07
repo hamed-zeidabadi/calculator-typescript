@@ -40,6 +40,7 @@ body {
   background: var(--background);
   font-family: "Roboto", sans-serif;
   font-size: 20px;
+  font-weight: bold;
 }
 .container {
   position: relative;
@@ -81,7 +82,7 @@ body {
   box-shadow: var(--num-shadow);
   background: var(--num-background);
 }
-#number0 {
+#zero {
   grid-column: 1/3;
 }
 
