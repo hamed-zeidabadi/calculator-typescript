@@ -58,7 +58,8 @@ marks.forEach((mark) => {
             case "AC":
                 state.current = [];
                 result.value = "0";
-                state.value = "";
+                state.value = result.value;
+                state.compute = 0;
                 break;
             case "C":
                 state.current.pop();
@@ -77,9 +78,9 @@ marks.forEach((mark) => {
                 divisionNumber();
                 state.sign = "÷";
                 break;
-            case "-":
-                // minusNumber();
-                // state.sign = "-";
+            case "X":
+                multipliedNumber();
+                state.sign = "X";
                 break;
             case "=":
                 equalsNumber();
@@ -145,6 +146,30 @@ const divisionNumber = () => {
     state.value = "";
     console.log(state.compute);
 };
+const multipliedNumber = () => {
+    let _value = "";
+    for (const item of state.current) {
+        if (state.current.length === 1) {
+            _value = item.toString().trim();
+        }
+        else {
+            _value += item.toString().trim();
+        }
+    }
+    if (state.compute === 0) {
+        state.compute = Number(_value);
+    }
+    else if (state.compute !== 0) {
+        state.compute = state.compute * Number(_value);
+    }
+    else {
+        return;
+    }
+    state.current = [];
+    result.value = "0";
+    state.value = "";
+    console.log(state.compute);
+};
 const equalsNumber = () => {
     if (state.current.length !== 0) {
         switch (state.sign) {
@@ -160,6 +185,10 @@ const equalsNumber = () => {
                 divisionNumber();
                 state.sign = "";
                 break;
+            case "X":
+                multipliedNumber();
+                state.sign = "";
+                break;
             default:
                 break;
         }
@@ -170,6 +199,5 @@ const equalsNumber = () => {
     state.current = [];
     state.value = String(state.compute);
     result.value = state.value;
-    state.compute = 0;
     console.log(state.compute);
 };
