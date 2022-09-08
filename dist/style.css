@@ -44,8 +44,8 @@ body {
 }
 .container {
   position: relative;
-  width: 250px;
-  height: 530px;
+  width: 280px;
+  height: 550px;
   background-color: var(--calc-background);
   border-radius: 35px;
   box-shadow: var(--calc-shadow);
@@ -74,22 +74,25 @@ body {
 .btn .btn_item {
   user-select: none;
   cursor: pointer;
-  height: 49px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 17px;
   box-shadow: var(--num-shadow);
   background: var(--num-background);
+  margin: 4px 1px 4px 1px;
 }
-#zero {
+#zero,
+#clear {
   grid-column: 1/3;
 }
 
 #multi,
 #sub,
 #add,
-#equal {
+#equal,
+#division {
   background: var(--eql-background);
   box-shadow: var(--c-background);
 }

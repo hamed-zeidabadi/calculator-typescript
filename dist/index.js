@@ -14,33 +14,36 @@ const marks = document.querySelectorAll(".marks");
 let state = {
     current: [],
     compute: 0,
-};
-const updateResult = () => {
-    let _value = "";
-    for (const item of state.current) {
-        _value = item.toString().trim();
-    }
-    result.value = _value;
+    value: "",
+    sign: "",
 };
 numbers.forEach((btn) => {
     btn.addEventListener("click", () => {
         const _value = Number(btn.innerHTML);
         if (state.current.length === 0) {
             state.current.push(_value);
+            state.value += String(_value);
         }
         else if (state.current.length === 0 && _value === 0) {
             state.current.push(0);
+            state.value = String(0);
         }
         else if (state.current[0] === 0 && _value === 0) {
             return;
         }
+        else if (state.current[0] === 0 && _value !== 0) {
+            state.current[0] = _value;
+            state.value = String(_value);
+        }
         else if (state.current.length === 0 && _value !== 0) {
             state.current.push(_value);
+            state.value += String(_value);
         }
         else {
             state.current.push(_value);
+            state.value += String(_value);
         }
-        updateResult();
+        result.value = state.value;
         console.log("_value :", state);
     });
 });
@@ -51,18 +54,24 @@ marks.forEach((mark) => {
         switch (_value) {
             case "AC":
                 state.current = [];
+                result.value = "0";
+                state.value = "";
                 break;
             case "C":
                 state.current.pop();
+                result.value = result.value.slice(0, -1);
+                state.value = result.value;
                 break;
             case "+":
                 plusNumber();
+                state.sign = "+";
                 break;
             case "-":
                 minusNumber();
+                state.sign = "-";
                 break;
             case "=":
-                // equalsNumber();
+                equalsNumber();
                 break;
             default:
                 break;
@@ -81,6 +90,8 @@ const plusNumber = () => {
     }
     state.compute += Number(_value);
     state.current = [];
+    result.value = "0";
+    state.value = "";
     console.log(state.compute);
 };
 const minusNumber = () => {
@@ -95,18 +106,33 @@ const minusNumber = () => {
     }
     state.compute -= Number(_value);
     state.current = [];
+    result.value = "0";
+    state.value = "";
     console.log(state.compute);
 };
-// const equalsNumber = (): any => {
-//   let _value: string = "";
-//   for (const item of state.current) {
-//     if (state.current.length === 1) {
-//       _value = item.toString().trim();
-//     } else {
-//       _value += item.toString().trim();
-//     }
-//   }
-//   state.compute -= Number(_value);
-//   state.current = [];
-//   console.log(state.compute);
-// };
+const equalsNumber = () => {
+    if (state.current.length !== 0) {
+        switch (state.sign) {
+            case "+":
+                plusNumber();
+                state.sign = "";
+                break;
+            case "-":
+                minusNumber();
+                state.sign = "";
+                break;
+            case "=":
+                // equalsNumber();
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        return;
+    }
+    state.current = [];
+    state.value = String(state.compute);
+    result.value = state.value;
+    console.log(state.compute);
+};
