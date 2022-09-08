@@ -27,6 +27,9 @@ let state: State = {
 numbers.forEach((btn) => {
   btn.addEventListener("click", () => {
     const _value = Number(btn.innerHTML);
+    if (state.current.length >= 8) {
+      return;
+    }
     if (state.current.length === 0) {
       state.current.push(_value);
       state.value += String(_value);
@@ -74,6 +77,14 @@ marks.forEach((mark) => {
         minusNumber();
         state.sign = "-";
         break;
+      case "÷":
+        divisionNumber();
+        state.sign = "÷";
+        break;
+      case "-":
+        // minusNumber();
+        // state.sign = "-";
+        break;
       case "=":
         equalsNumber();
         break;
@@ -115,6 +126,28 @@ const minusNumber = (): any => {
   console.log(state.compute);
 };
 
+const divisionNumber = (): any => {
+  let _value: string = "";
+  for (const item of state.current) {
+    if (state.current.length === 1) {
+      _value = item.toString().trim();
+    } else {
+      _value += item.toString().trim();
+    }
+  }
+  if (state.compute === 0) {
+    state.compute = Number(_value);
+  } else if (state.compute !== 0) {
+    state.compute = state.compute / Number(_value);
+  } else {
+    return;
+  }
+  state.current = [];
+  result.value = "0";
+  state.value = "";
+  console.log(state.compute);
+};
+
 const equalsNumber = (): any => {
   if (state.current.length !== 0) {
     switch (state.sign) {
@@ -126,8 +159,9 @@ const equalsNumber = (): any => {
         minusNumber();
         state.sign = "";
         break;
-      case "=":
-        // equalsNumber();
+      case "÷":
+        divisionNumber();
+        state.sign = "";
         break;
       default:
         break;
