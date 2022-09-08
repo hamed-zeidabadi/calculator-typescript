@@ -22,12 +22,29 @@
   --calc-shadow: 30px 30px 55px #ccc;
   --num-background: linear-gradient(to bottom right, #c0c5d1, #edeef5);
   --num-shadow: inset 2px 2px 3px #ebebf3, inset 4px 4px 15px #cacfd6,
-    3px 3px 12px;
+    3px 3px 12px #b7c4cf;
   --eql-background: linear-gradient(to bottom right, #d36d12, #ed9d1e);
   --eql-shadow: inset 1px 1px 1px #c8ced9, inset 2px 2px 8px #cacfd6;
   --c-background: linear-gradient(to bottom right, #8b94a1, #eff0f7);
   --c-shadow: inset 1px 1px 1px #c8ced9, inset 2px 2px 8px #cacfd6;
   --font-color: #0025;
+  --mode-bk: #0025;
+}
+
+/* dark mode colors */
+
+[data-theme="dark"] {
+  --calc-background: #1e212a;
+  --calc-shadow: 30px 30px 55px #888;
+  --num-background: linear-gradient(to bottom right, #292d38, #3c3c44);
+  --num-shadow: inset 1px 1px 1px #393c4a, inset 4px 4px 15px #20232d,
+    3px 3px 12px #5f6f94;
+  --eql-shadow: inset 1px 1px 2px #f9aa2d99, inset 4px 4px 5px #a54e04,
+    3px 3px 12px #f1a661;
+  --c-background: linear-gradient(to bottom right, #494f5c, #6f7587);
+  --c-shadow: inset 1px 1px 1px #656b7b,
+    inset 4px 4px 15px #333942 3px 3px 5px #c8ced9;
+  --font-color: #fff;
   --mode-bk: #0025;
 }
 
@@ -39,8 +56,9 @@ body {
   place-content: center;
   background: var(--background);
   font-family: "Roboto", sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
+  transition: all 0.3s ease-in;
 }
 .container {
   position: relative;
@@ -55,7 +73,7 @@ body {
   position: relative;
   top: 150px;
   width: 100%;
-  font-size: 35px;
+  font-size: 40px;
   padding: 0 12px;
   border: none;
   color: var(--font-color);

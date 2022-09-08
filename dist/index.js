@@ -1,7 +1,6 @@
 "use strict";
 const result = document.querySelector("#result");
 const numbers = document.querySelectorAll(".numbers");
-// const clear = document.querySelector("#clear")! as HTMLElement;
 // const del = document.querySelector("#del")! as HTMLElement;
 // const percent = document.querySelector("#percent")! as HTMLElement;
 // const division = document.querySelector("#division")! as HTMLElement;
@@ -57,7 +56,7 @@ marks.forEach((mark) => {
         switch (_value) {
             case "AC":
                 state.current = [];
-                result.value = "0";
+                result.value = "";
                 state.value = result.value;
                 state.compute = 0;
                 break;
@@ -102,7 +101,7 @@ const plusNumber = () => {
     }
     state.compute += Number(_value);
     state.current = [];
-    result.value = "0";
+    result.value = "";
     state.value = "";
     console.log(state.compute);
 };
@@ -118,7 +117,7 @@ const minusNumber = () => {
     }
     state.compute -= Number(_value);
     state.current = [];
-    result.value = "0";
+    result.value = "";
     state.value = "";
     console.log(state.compute);
 };
@@ -137,12 +136,13 @@ const divisionNumber = () => {
     }
     else if (state.compute !== 0) {
         state.compute = state.compute / Number(_value);
+        console.log("/ :", 10 / 5);
     }
     else {
         return;
     }
     state.current = [];
-    result.value = "0";
+    result.value = "";
     state.value = "";
     console.log(state.compute);
 };
@@ -166,7 +166,7 @@ const multipliedNumber = () => {
         return;
     }
     state.current = [];
-    result.value = "0";
+    result.value = "";
     state.value = "";
     console.log(state.compute);
 };
@@ -201,3 +201,19 @@ const equalsNumber = () => {
     result.value = state.value;
     console.log(state.compute);
 };
+//dark mode
+const body = document.querySelector("body");
+const mode = document.querySelector("#mode");
+mode.addEventListener("click", () => {
+    const _mode = mode.getAttribute("data-mode");
+    if (_mode === "false") {
+        mode.className = "fa-solid fa-sun";
+        mode.setAttribute("data-mode", "true");
+        body.setAttribute("data-theme", "dark");
+    }
+    else {
+        mode.className = "fa-solid fa-moon";
+        mode.setAttribute("data-mode", "false");
+        body.setAttribute("data-theme", "light");
+    }
+});
