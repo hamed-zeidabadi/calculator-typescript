@@ -170,5 +170,6 @@ const equalsNumber = () => {
     state.current = [];
     state.value = String(state.compute);
     result.value = state.value;
+    state.compute = 0;
     console.log(state.compute);
 };
