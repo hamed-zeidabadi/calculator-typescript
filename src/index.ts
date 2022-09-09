@@ -1,12 +1,14 @@
-
+//global variable
 const result = document.querySelector("#result")! as HTMLInputElement;
 const numbers = document.querySelectorAll(".numbers")!;
 const equal = document.querySelector("#equal")! as HTMLElement;
 const marks = document.querySelectorAll(".marks")!;
 const historyList = document.querySelector(".history")! as HTMLElement;
-let tagList = document.getElementsByClassName('tag-list')!;
 let childNodes = historyList.childNodes;
+const body = document.querySelector("body")! as HTMLElement;
+const mode = document.querySelector("#mode")! as HTMLElement;
 
+//interface state
 interface State {
   current: any[];
   compute: number;
@@ -14,8 +16,7 @@ interface State {
   sign: string;
   counter: any[]
 }
-
-
+//state value
 let state: State = {
   current: [],
   compute: 0,
@@ -24,12 +25,7 @@ let state: State = {
   counter: []
 };
 
-
-
-//dark mode
-const body = document.querySelector("body")! as HTMLElement;
-const mode = document.querySelector("#mode")! as HTMLElement;
-
+//dark mode logic
 mode.addEventListener("click", () => {
   const _mode: string = mode.getAttribute("data-mode")!;
   if (_mode === "false") {
@@ -43,8 +39,7 @@ mode.addEventListener("click", () => {
   }
 });
 
-
-
+//calculator logic
 
 numbers.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -132,7 +127,6 @@ const plusNumber = (): any => {
   state.current = [];
   result.value = "";
   state.value = "";
-  // console.log(state.compute);
 };
 
 const minusNumber = (): any => {
@@ -179,7 +173,6 @@ const divisionNumber = (): any => {
   state.current = [];
   result.value = "";
   state.value = "";
-  // console.log(state.compute);
 };
 
 
@@ -202,7 +195,6 @@ const multipliedNumber = (): any => {
   state.current = [];
   result.value = "";
   state.value = "";
-  // console.log(state.compute);
 };
 
 
@@ -239,7 +231,7 @@ const equalsNumber = (): any => {
 };
 
 
-
+//history logic
 const createHistory = (x: string): any => {
   state.counter.push(Number(x));
 
@@ -247,7 +239,6 @@ const createHistory = (x: string): any => {
   historyList.appendChild(tag);
   tag.classList.add('tag-list');
   tag.innerHTML = String(x);
-
   state.current = [];
   state.value = '';
   state.compute = 0;
@@ -258,6 +249,7 @@ const createHistory = (x: string): any => {
   updateNode()
 }
 
+//update node list logic
 
 const updateNode = () => {
   childNodes.forEach(element => {
@@ -266,4 +258,3 @@ const updateNode = () => {
     })
   });
 }
-

@@ -1,11 +1,14 @@
 "use strict";
+//global variable
 const result = document.querySelector("#result");
 const numbers = document.querySelectorAll(".numbers");
 const equal = document.querySelector("#equal");
 const marks = document.querySelectorAll(".marks");
 const historyList = document.querySelector(".history");
-let tagList = document.getElementsByClassName('tag-list');
 let childNodes = historyList.childNodes;
+const body = document.querySelector("body");
+const mode = document.querySelector("#mode");
+//state value
 let state = {
     current: [],
     compute: 0,
@@ -13,9 +16,7 @@ let state = {
     sign: "",
     counter: []
 };
-//dark mode
-const body = document.querySelector("body");
-const mode = document.querySelector("#mode");
+//dark mode logic
 mode.addEventListener("click", () => {
     const _mode = mode.getAttribute("data-mode");
     if (_mode === "false") {
@@ -29,6 +30,7 @@ mode.addEventListener("click", () => {
         body.setAttribute("data-theme", "light");
     }
 });
+//calculator logic
 numbers.forEach((btn) => {
     btn.addEventListener("click", () => {
         const _value = Number(btn.innerHTML);
@@ -117,7 +119,6 @@ const plusNumber = () => {
     state.current = [];
     result.value = "";
     state.value = "";
-    // console.log(state.compute);
 };
 const minusNumber = () => {
     let _value = "";
@@ -165,7 +166,6 @@ const divisionNumber = () => {
     state.current = [];
     result.value = "";
     state.value = "";
-    // console.log(state.compute);
 };
 const multipliedNumber = () => {
     let _value = "";
@@ -189,7 +189,6 @@ const multipliedNumber = () => {
     state.current = [];
     result.value = "";
     state.value = "";
-    // console.log(state.compute);
 };
 const equalsNumber = () => {
     if (state.current.length !== 0) {
@@ -222,6 +221,7 @@ const equalsNumber = () => {
     result.value = state.value;
     createHistory(String(state.compute));
 };
+//history logic
 const createHistory = (x) => {
     state.counter.push(Number(x));
     const tag = document.createElement('a');
@@ -237,6 +237,7 @@ const createHistory = (x) => {
     }
     updateNode();
 };
+//update node list logic
 const updateNode = () => {
     childNodes.forEach(element => {
         element.addEventListener('click', () => {

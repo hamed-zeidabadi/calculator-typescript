@@ -10,6 +10,8 @@
   text-decoration: none;
 }
 
+/* add font-face */
+
 @font-face {
   font-family: "Roboto";
   font-weight: normal;
@@ -50,6 +52,7 @@
   --mode-bk: #0025;
 }
 
+/* body style */
 body {
   position: relative;
   width: 100vw;
@@ -64,6 +67,7 @@ body {
   min-height: 100vh;
 }
 
+/* history style */
 .history {
   width: 300px;
   height: 20px;
@@ -90,6 +94,7 @@ body {
 }
 
 
+/* container style */
 
 .container {
   position: relative;
@@ -100,6 +105,8 @@ body {
   box-shadow: var(--calc-shadow);
   color: var(--font-color);
 }
+
+/* result style */
 
 #result {
   position: relative;
@@ -156,6 +163,9 @@ body {
   box-shadow: var(--c-shadow);
 }
 
+
+/* swich mode style */
+
 .mode {
   position: absolute;
   cursor: pointer;
@@ -171,7 +181,6 @@ body {
   background: var(--mode-bk);
   overflow: hidden;
 }
-
 
 #mode {
   font-size: 40px;
