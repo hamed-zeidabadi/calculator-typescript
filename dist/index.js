@@ -1,21 +1,34 @@
 "use strict";
 const result = document.querySelector("#result");
 const numbers = document.querySelectorAll(".numbers");
-// const del = document.querySelector("#del")! as HTMLElement;
-// const percent = document.querySelector("#percent")! as HTMLElement;
-// const division = document.querySelector("#division")! as HTMLElement;
-// const multi = document.querySelector("#multi")! as HTMLElement;
-// const sub = document.querySelector("#sub")! as HTMLElement;
-// const add = document.querySelector("#add")! as HTMLElement;
-// const dot = document.querySelector("#dot")! as HTMLElement;
-// const equal = document.querySelector("#equal")! as HTMLElement;
+const equal = document.querySelector("#equal");
 const marks = document.querySelectorAll(".marks");
+const historyList = document.querySelector(".history");
+let tagList = document.getElementsByClassName('tag-list');
+let childNodes = historyList.childNodes;
 let state = {
     current: [],
     compute: 0,
     value: "",
     sign: "",
+    counter: []
 };
+//dark mode
+const body = document.querySelector("body");
+const mode = document.querySelector("#mode");
+mode.addEventListener("click", () => {
+    const _mode = mode.getAttribute("data-mode");
+    if (_mode === "false") {
+        mode.className = "fa-solid fa-sun";
+        mode.setAttribute("data-mode", "true");
+        body.setAttribute("data-theme", "dark");
+    }
+    else {
+        mode.className = "fa-solid fa-moon";
+        mode.setAttribute("data-mode", "false");
+        body.setAttribute("data-theme", "light");
+    }
+});
 numbers.forEach((btn) => {
     btn.addEventListener("click", () => {
         const _value = Number(btn.innerHTML);
@@ -24,6 +37,7 @@ numbers.forEach((btn) => {
         }
         if (state.current.length === 0) {
             state.current.push(_value);
+            result.value = String(_value);
             state.value += String(_value);
         }
         else if (state.current.length === 0 && _value === 0) {
@@ -46,13 +60,13 @@ numbers.forEach((btn) => {
             state.value += String(_value);
         }
         result.value = state.value;
-        console.log("_value :", state);
+        // console.log("_value :", state);
     });
 });
 marks.forEach((mark) => {
     mark.addEventListener("click", () => {
         const _value = mark.innerHTML;
-        console.log("case", _value);
+        // console.log("case", _value);
         switch (_value) {
             case "AC":
                 state.current = [];
@@ -103,7 +117,7 @@ const plusNumber = () => {
     state.current = [];
     result.value = "";
     state.value = "";
-    console.log(state.compute);
+    // console.log(state.compute);
 };
 const minusNumber = () => {
     let _value = "";
@@ -115,11 +129,18 @@ const minusNumber = () => {
             _value += item.toString().trim();
         }
     }
-    state.compute -= Number(_value);
+    const _num = state.compute - Number(_value);
+    if (state.compute === 0) {
+        state.compute = _num * -1;
+    }
+    else {
+        state.compute = _num;
+    }
     state.current = [];
     result.value = "";
     state.value = "";
-    console.log(state.compute);
+    console.log('kool: ', state.compute);
+    console.log('domi', Number(_value));
 };
 const divisionNumber = () => {
     let _value = "";
@@ -136,7 +157,7 @@ const divisionNumber = () => {
     }
     else if (state.compute !== 0) {
         state.compute = state.compute / Number(_value);
-        console.log("/ :", 10 / 5);
+        // console.log("/ :", 10 / 5);
     }
     else {
         return;
@@ -144,7 +165,7 @@ const divisionNumber = () => {
     state.current = [];
     result.value = "";
     state.value = "";
-    console.log(state.compute);
+    // console.log(state.compute);
 };
 const multipliedNumber = () => {
     let _value = "";
@@ -168,7 +189,7 @@ const multipliedNumber = () => {
     state.current = [];
     result.value = "";
     state.value = "";
-    console.log(state.compute);
+    // console.log(state.compute);
 };
 const equalsNumber = () => {
     if (state.current.length !== 0) {
@@ -199,21 +220,27 @@ const equalsNumber = () => {
     state.current = [];
     state.value = String(state.compute);
     result.value = state.value;
-    console.log(state.compute);
+    createHistory(String(state.compute));
 };
-//dark mode
-const body = document.querySelector("body");
-const mode = document.querySelector("#mode");
-mode.addEventListener("click", () => {
-    const _mode = mode.getAttribute("data-mode");
-    if (_mode === "false") {
-        mode.className = "fa-solid fa-sun";
-        mode.setAttribute("data-mode", "true");
-        body.setAttribute("data-theme", "dark");
+const createHistory = (x) => {
+    state.counter.push(Number(x));
+    const tag = document.createElement('a');
+    historyList.appendChild(tag);
+    tag.classList.add('tag-list');
+    tag.innerHTML = String(x);
+    state.current = [];
+    state.value = '';
+    state.compute = 0;
+    if (state.counter.length > 6) {
+        const firstChild = historyList.firstChild;
+        historyList.removeChild(firstChild);
     }
-    else {
-        mode.className = "fa-solid fa-moon";
-        mode.setAttribute("data-mode", "false");
-        body.setAttribute("data-theme", "light");
-    }
-});
+    updateNode();
+};
+const updateNode = () => {
+    childNodes.forEach(element => {
+        element.addEventListener('click', () => {
+            element.remove();
+        });
+    });
+};

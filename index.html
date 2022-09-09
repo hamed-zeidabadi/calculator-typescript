@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculator</title>
 
-    <link rel="stylesheet" href="dist/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
-  <body>
-    <section class="container">
-      <div class="result">
-        <input type="text" readonly id="result" value="0" placeholder="0" />
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
 
-      <div class="btn">
-        <div class="btn_item marks" id="clear">AC</div>
-        <div class="btn_item marks" id="del">C</div>
-        <div class="btn_item marks" id="percent">%</div>
-        <div class="btn_item numbers">7</div>
-        <div class="btn_item numbers">8</div>
-        <div class="btn_item numbers">9</div>
-        <div class="btn_item marks" id="multi">X</div>
-        <div class="btn_item numbers">4</div>
-        <div class="btn_item numbers">5</div>
-        <div class="btn_item numbers">6</div>
-        <div class="btn_item marks" id="sub">-</div>
-        <div class="btn_item numbers">1</div>
-        <div class="btn_item numbers">2</div>
-        <div class="btn_item numbers">3</div>
-        <div class="btn_item marks" id="add">+</div>
-        <div class="btn_item numbers" id="zero">0</div>
-        <div class="btn_item marks" id="equal">=</div>
-        <div class="btn_item marks" id="division">÷</div>
-      </div>
-      <div class="mode">
-        <i id="mode" data-mode="false" class="fas fa-moon"></i>
-      </div>
-    </section>
+  <link rel="stylesheet" href="dist/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
-    <script src="./dist/index.js" defer></script>
-  </body>
+<body>
+  <secttion class="history">
+    <!-- <a href="" class="tag-items"></a> -->
+    <a href=""></a>
+    <a href=""></a>
+  </secttion>
+  <section class="container">
+    <div class="result">
+      <input type="text" readonly id="result" value="0" placeholder="0" />
+    </div>
+
+    <div class="btn">
+      <div class="btn_item marks" id="clear">AC</div>
+      <div class="btn_item marks" id="del">C</div>
+      <div class="btn_item marks" id="percent">%</div>
+      <div class="btn_item numbers">7</div>
+      <div class="btn_item numbers">8</div>
+      <div class="btn_item numbers">9</div>
+      <div class="btn_item marks" id="multi">X</div>
+      <div class="btn_item numbers">4</div>
+      <div class="btn_item numbers">5</div>
+      <div class="btn_item numbers">6</div>
+      <div class="btn_item marks" id="sub">-</div>
+      <div class="btn_item numbers">1</div>
+      <div class="btn_item numbers">2</div>
+      <div class="btn_item numbers">3</div>
+      <div class="btn_item marks" id="add">+</div>
+      <div class="btn_item numbers" id="zero">0</div>
+      <div class="btn_item marks" id="equal">=</div>
+      <div class="btn_item marks" id="division">÷</div>
+    </div>
+    <div class="mode">
+      <i id="mode" data-mode="false" class="fas fa-moon"></i>
+    </div>
+  </section>
+
+  <script defer src="./dist/index.js"></script>
+</body>
+
 </html>
