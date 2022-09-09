@@ -140,8 +140,6 @@ const minusNumber = () => {
     state.current = [];
     result.value = "";
     state.value = "";
-    console.log('kool: ', state.compute);
-    console.log('domi', Number(_value));
 };
 const divisionNumber = () => {
     let _value = "";
